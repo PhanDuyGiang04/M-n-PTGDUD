@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Comparison</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Compare BMI of Mark and John</h2>
+        <h4>Mark's Information</h4>
+        <input type="number" id="massMark" placeholder="Weight (kg)" required>
+        <input type="number" id="heightMark" placeholder="Height (m)" required>
+
+        <h4>John's Information</h4>
+        <input type="number" id="massJohn" placeholder="Weight (kg)" required>
+        <input type="number" id="heightJohn" placeholder="Height (m)" required>
+
+        <button onclick="calculateBMI()">Calculate BMI</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateBMI() {
+            const massMark = parseFloat(document.getElementById('massMark').value);
+            const heightMark = parseFloat(document.getElementById('heightMark').value);
+            const massJohn = parseFloat(document.getElementById('massJohn').value);
+            const heightJohn = parseFloat(document.getElementById('heightJohn').value);
+
+            const bmiMark = massMark / (heightMark ** 2);
+            const bmiJohn = massJohn / (heightJohn ** 2);
+            const resultDiv = document.getElementById('result');
+
+            let resultMessage;
+            if (bmiMark > bmiJohn) {
+                resultMessage = `Mark's BMI (${bmiMark.toFixed(2)}) is higher than John's (${bmiJohn.toFixed(2)})!`;
+            } else if (bmiJohn > bmiMark) {
+                resultMessage = `John's BMI (${bmiJohn.toFixed(2)}) is higher than Mark's (${bmiMark.toFixed(2)})!`;
+            } else {
+                resultMessage = `Mark and John have the same BMI (${bmiMark.toFixed(2)})!`;
+            }
+
+            resultDiv.innerHTML = `<h3>Results:</h3><p>${resultMessage}</p>`;
+        }
+    </script>
+</body>
+</html>

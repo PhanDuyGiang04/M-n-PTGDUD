@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map Function Example</title>
+</head>
+<body>
+    <h1>Map Function</h1>
+    <input type="text" id="inputArray" placeholder="Enter numbers separated by commas">
+    <button id="mapButton">Map with Add Two</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        function addTwo(input) {
+            return input + 2;
+        }
+
+        function map(numbers, callback) {
+            const result = [];
+            for (let i = 0; i < numbers.length; i++) {
+                result.push(callback(numbers[i]));
+            }
+            return result;
+        }
+
+        document.getElementById('mapButton').addEventListener('click', function() {
+            const input = document.getElementById('inputArray').value;
+            const numbers = input.split(',').map(Number); // Convert input to an array of numbers
+            const result = map(numbers, addTwo);
+            document.getElementById('result').textContent = `Result: [${result.join(', ')}]`;
+        });
+    </script>
+</body>
+</html>

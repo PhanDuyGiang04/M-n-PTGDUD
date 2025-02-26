@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Betting App - Game Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .output {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Football Betting App - Game Events</h1>
+    <div class="output" id="output"></div>
+
+    <script>
+        // Game events log
+        const gameEvents = new Map([ 
+            [17, '⚽ GOAL'], 
+            [36, '🔁 Substitution'], 
+            [47, '⚽ GOAL'], 
+            [61, '🔁 Substitution'], 
+            [64, '🔶 Yellow card'], 
+            [69, '🔴 Red card'], 
+            [70, '🔁 Substitution'], 
+            [72, '🔁 Substitution'], 
+            [76, '⚽ GOAL'], 
+            [80, '⚽ GOAL'], 
+            [92, '🔶 Yellow card'], 
+        ]);
+
+        const outputDiv = document.getElementById('output');
+
+        // 1. Create an array 'events' of different game events (no duplicates)
+        const events = [...new Set(gameEvents.values())];
+        outputDiv.innerHTML += `Sự kiện trò chơi khác nhau: ${events.join(', ')}<br><br>`;
+
+        // 2. Remove the yellow card from minute 64
+        gameEvents.delete(64);
+        outputDiv.innerHTML += `Diễn biến trận đấu sau khi gỡ thẻ vàng:<br>`;
+        gameEvents.forEach((event, minute) => {
+            outputDiv.innerHTML += `${minute}: ${event}<br>`;
+        });
+        outputDiv.innerHTML += '<br>';
+
+        // 3. Compute and log the average time between events
+        const totalEvents = gameEvents.size;
+        const averageTime = (90 / totalEvents).toFixed(2);
+        outputDiv.innerHTML += `Một sự kiện đã xảy ra, trung bình, khoảng ${averageTime} phút<br><br>`;
+
+        // 4. Log each event with its half indication
+        gameEvents.forEach((event, minute) => {
+            const half = minute <= 45 ? 'Hiệp 1: ' : 'Hiệp 2:';
+            outputDiv.innerHTML += `[${half}] ${minute}: ${event}<br>`;
+        });
+    </script>
+
+</body>
+</html>

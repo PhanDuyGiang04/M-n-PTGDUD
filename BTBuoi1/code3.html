@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gymnastics Team Score Comparison</title>
+   
+</head>
+<body>
+    <div class="container">
+        <h2>Gymnastics Team Score Comparison</h2>
+        <h4>Dolphins Scores</h4>
+        <input type="number" id="scoreDolphin1" placeholder="Score 1" required>
+        <input type="number" id="scoreDolphin2" placeholder="Score 2" required>
+        <input type="number" id="scoreDolphin3" placeholder="Score 3" required>
+
+        <h4>Koalas Scores</h4>
+        <input type="number" id="scoreKoala1" placeholder="Score 1" required>
+        <input type="number" id="scoreKoala2" placeholder="Score 2" required>
+        <input type="number" id="scoreKoala3" placeholder="Score 3" required>
+
+        <button onclick="calculateWinner()">Calculate Winner</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateWinner() {
+            // Get scores from input fields
+            const dolphinsScores = [
+                parseFloat(document.getElementById('scoreDolphin1').value),
+                parseFloat(document.getElementById('scoreDolphin2').value),
+                parseFloat(document.getElementById('scoreDolphin3').value)
+            ];
+
+            const koalasScores = [
+                parseFloat(document.getElementById('scoreKoala1').value),
+                parseFloat(document.getElementById('scoreKoala2').value),
+                parseFloat(document.getElementById('scoreKoala3').value)
+            ];
+
+            // Calculate average scores
+            const averageDolphins = dolphinsScores.reduce((a, b) => a + b, 0) / dolphinsScores.length;
+            const averageKoalas = koalasScores.reduce((a, b) => a + b, 0) / koalasScores.length;
+
+            // Prepare result message
+            let resultMessage;
+            if (averageDolphins >= 100 && averageKoalas >= 100) {if (averageDolphins > averageKoalas) {
+                    resultMessage = `Dolphins win with an average score of ${averageDolphins.toFixed(2)}!`;
+                } else if (averageKoalas > averageDolphins) {
+                    resultMessage = `Koalas win with an average score of ${averageKoalas.toFixed(2)}!`;
+                } else {
+                    resultMessage = `It's a draw! Both teams have an average score of ${averageDolphins.toFixed(2)}!`;
+                }
+            } else {
+                resultMessage = "No team wins the trophy. Both teams must score at least 100 points to win!";
+            }
+
+            // Display result
+            document.getElementById('result').innerHTML = `<h3>Results:</h3><p>${resultMessage}</p>`;
+        }
+    </script>
+</body>
+</html>

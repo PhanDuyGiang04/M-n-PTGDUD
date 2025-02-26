@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .number {
+            width: 15rem;
+            height: 15rem;
+            font-size: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            color: #222;
+            border-radius: 50%;
+            margin: 20px 0;
+        }
+        .controls {
+            display: flex;
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess My Number!</h1>
+    <p class="message">Start guessing...</p>
+    <div class="number">?</div>
+    <p class="score">Score: 20</p>
+    <div class="controls">
+        <input type="number" class="guess" placeholder="Enter a number" />
+        <button class="btn">Check</button>
+        <button class="btn again">Again</button>
+    </div>
+
+    <script>
+        let score, secretNumber;
+
+        function initGame() {
+            score = 20;
+            secretNumber = 20; // Đặt số bí mật là 20
+
+            document.querySelector('.message').textContent = 'Start guessing...';
+            document.querySelector('.score').textContent = 'Score: ' + score;
+            document.querySelector('.number').textContent = '?';
+            document.querySelector('.guess').value = '';
+
+            document.body.style.backgroundColor = '#222'; // Khôi phục màu nền
+            document.querySelector('.number').style.width = '15rem';
+        }
+
+        function checkGuess() {
+            const guess = Number(document.querySelector('.guess').value);
+            if (!guess) {
+                document.querySelector('.message').textContent = 'No number!';
+            } else if (guess === secretNumber) {
+                document.querySelector('.message').textContent = 'Correct Number!';
+                document.body.style.backgroundColor = '#222'; // Đúng số
+                document.querySelector('.number').textContent = secretNumber;
+            } else {
+                document.querySelector('.message').textContent = 'Wrong Number!';
+                document.body.style.backgroundColor = '#ff4d4d'; // Sai số
+            }
+        }
+
+        document.querySelector('.btn').addEventListener('click', checkGuess);
+        document.querySelector('.again').addEventListener('click', initGame);
+
+        // Khởi động trò chơi khi tải trang
+        initGame();
+    </script>
+</body>
+</html>

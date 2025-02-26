@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+</head>
+<body>
+    <h1>Tip Calculator</h1>
+    <label for="bill">Nhập giá trị hóa đơn:</label>
+    <input type="number" id="bill" placeholder="Nhập giá trị hóa đơn" />
+    <button onclick="calculateTip()">Tính Tiền Tip</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateTip() {
+            const bill = parseFloat(document.getElementById('bill').value);
+            const tip = (bill >= 50 && bill <= 300) ? bill * 0.15 : bill * 0.2;
+            const total = bill + tip;
+
+            document.getElementById('result').innerText = 
+                `Giá trị hóa đơn là ${bill}, tiền tip là ${tip.toFixed(2)}, và tổng giá trị là ${total.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

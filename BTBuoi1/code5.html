@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gymnastics Team Winner</title>
+</head>
+<body>
+    <h1>Kiểm Tra Đội Chiến Thắng</h1>
+    <button onclick="determineWinners()">Xác định đội chiến thắng</button>
+
+    <div id="result"></div>
+
+    <script>
+        const calcAverage = (score1, score2, score3) => (score1 + score2 + score3) / 3;
+
+        const determineWinners = () => {
+            // Đầu vào dữ liệu
+            const dolphinsScores1 = [44, 23, 71];
+            const koalasScores1 = [65, 54, 49];
+            const dolphinsScores2 = [85, 54, 41];
+            const koalasScores2 = [23, 34, 27];
+
+            // Tính điểm trung bình
+            const avgDolphins1 = calcAverage(...dolphinsScores1);
+            const avgKoalas1 = calcAverage(...koalasScores1);
+            const avgDolphins2 = calcAverage(...dolphinsScores2);
+            const avgKoalas2 = calcAverage(...koalasScores2);
+
+            // Kiểm tra và in kết quả
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = ''; // Xóa kết quả trước đó
+
+            const checkWinner = (avgDolphins, avgKoalas) => {
+                if (avgDolphins >= 2 * avgKoalas) {
+                    return `Dolphins win (${avgDolphins.toFixed(2)} vs. ${avgKoalas.toFixed(2)})`;
+                } else if (avgKoalas >= 2 * avgDolphins) {
+                    return `Koalas win (${avgKoalas.toFixed(2)} vs. ${avgDolphins.toFixed(2)})`;
+                } else {
+                    return "No team wins.";
+                }
+            };
+
+            // Hiển thị kết quả cho cả hai bộ dữ liệu
+            resultDiv.innerHTML += checkWinner(avgDolphins1, avgKoalas1) + '<br>';
+            resultDiv.innerHTML += checkWinner(avgDolphins2, avgKoalas2);
+        };
+    </script>
+</body>
+</html>

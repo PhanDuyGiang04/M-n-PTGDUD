@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Betting App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .output {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Football Betting App</h1>
+    <div class="output" id="output"></div>
+
+    <script>
+        const game = { 
+            team1: 'Bayern Munich', 
+            team2: 'Borussia Dortmund', 
+            players: [ 
+                [ 
+                    'Neuer', 
+                    'Pavard', 
+                    'Martinez', 
+                    'Alaba', 
+                    'Davies', 
+                    'Kimmich', 
+                    'Goretzka', 
+                    'Coman', 
+                    'Muller', 
+                    'Gnabry', 
+                    'Lewandowski', 
+                ], 
+                [ 
+                    'Burki', 
+                    'Schulz', 
+                    'Hummels', 
+                    'Akanji', 
+                    'Hakimi', 
+                    'Weigl', 
+                    'Witsel', 
+                    'Hazard', 
+                    'Brandt', 
+                    'Sancho', 
+                    'Gotze', 
+                ], 
+            ], 
+            score: '4:0', 
+            scored: ['Lewandowski', 'Gnabry', 'Lewandowski', 'Hummels'], 
+            date: 'Nov 9th, 2037', 
+            odds: { 
+                team1: 1.33, 
+                x: 3.25, 
+                team2: 6.5, 
+            }, 
+        }; 
+
+        // 1. Loop over the game.scored array and print each player name
+        const outputDiv = document.getElementById('output');
+        game.scored.forEach((player, index) => {
+            outputDiv.innerHTML += `Goal ${index + 1}: ${player}<br>`;
+        });
+
+        // 2. Calculate the average odd
+        const oddsArray = Object.values(game.odds);
+        const averageOdd = oddsArray.reduce((sum, odd) => sum + odd, 0) / oddsArray.length;
+        outputDiv.innerHTML += `Average Odd: ${averageOdd.toFixed(2)}<br>`;
+
+        // 3. Print the odds in a formatted way
+        outputDiv.innerHTML += `Odd of victory ${game.team1}: ${game.odds.team1}<br>`;
+        outputDiv.innerHTML += `Odd of draw: ${game.odds.x}<br>`;
+        outputDiv.innerHTML += `Odd of victory ${game.team2}: ${game.odds.team2}<br>`;
+
+        // 4. Create an object 'scorers' to count goals
+        const scorers = {};
+        game.scored.forEach(player => {
+            scorers[player] = (scorers[player] || 0) + 1;
+        });
+
+        outputDiv.innerHTML += 'Scorers: ' + JSON.stringify(scorers);
+    </script>
+
+</body>
+</html>

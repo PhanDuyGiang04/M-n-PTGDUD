@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máy Tính Tiền Tip</title>
+</head>
+<body>
+    <h1>Máy Tính Tiền Tip</h1>
+    
+    <label for="bills">Nhập các giá trị hóa đơn (cách nhau bởi dấu phẩy):</label>
+    <input type="text" id="bills" placeholder="Ví dụ: 22, 295, 176, 440, 37, 105, 10, 1100, 86, 52" />
+
+    <button onclick="calculateTips()">Tính Tiền Tip</button>
+
+    <div id="result"></div>
+
+    <script>
+        // Hàm tính tiền tip
+        const calcTip = (bill) => {
+            return (bill >= 50 && bill <= 300) ? bill * 0.15 : bill * 0.2;
+        };
+
+        // Hàm tính toán tiền tip và tổng
+        const calculateTips = () => {
+            const billInput = document.getElementById('bills').value;
+            const billArray = billInput.split(',').map(bill => parseFloat(bill.trim()));
+
+            const tips = [];
+            const totals = [];
+
+            // Tính toán tiền tip và tổng
+            for (let i = 0; i < billArray.length; i++) {
+                const tip = calcTip(billArray[i]);
+                tips.push(tip);
+                totals.push(billArray[i] + tip);
+            }
+
+            // Tính trung bình
+            const averageTotal = calcAverage(totals);
+
+            // Hiển thị kết quả
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <h3>Kết Quả:</h3>
+                <p>Giá trị hóa đơn: ${billArray.join(', ')}</p>
+                <p>Tiền tip: ${tips.map(tip => tip.toFixed(2)).join(', ')}</p>
+                <p>Tổng giá trị: ${totals.map(total => total.toFixed(2)).join(', ')}</p>
+                <p>Tổng trung bình: ${averageTotal.toFixed(2)}</p>
+            `;
+        };
+
+        // Hàm tính trung bình của một mảng
+        const calcAverage = (arr) => {
+            let sum = 0;
+            for (let i = 0; i < arr.length; i++) {
+                sum += arr[i];
+            }
+            return sum / arr.length; // Trả về trung bình
+        };
+    </script>
+</body>
+</html>
